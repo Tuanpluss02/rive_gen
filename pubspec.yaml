@@ -1,0 +1,17 @@
+name: rive_gen
+description: A code generator that automatically creates type-safe Dart classes for Rive assets, similar to flutter_gen for images.
+version: 1.0.0
+homepage: https://github.com/Tuanpluss02/rive_gen
+repository: https://github.com/Tuanpluss02/rive_gen
+issue_tracker: https://github.com/Tuanpluss02/rive_gen/issues
+documentation: https://github.com/Tuanpluss02/rive_gen#readme
+environment:
+  sdk: ^3.8.1
+
+# Add regular dependencies here.
+dependencies:
+  # path: ^1.8.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.24.0
