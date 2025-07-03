@@ -154,8 +154,12 @@ Future<void> _generateCode(ArgResults results) async {
     // Watch mode
     final watchMode = results['watch'] as bool;
     if (watchMode) {
-      Logger.info('Watching for changes... Press Ctrl+C to stop.');
-      await _watchFiles(config, riveFiles);
+      await _watchFiles(
+        configPath,
+        config.assetsPath,
+        config.outputDir,
+        config.debugMode,
+      );
     }
   } catch (e, stackTrace) {
     Logger.error('Code generation failed', e, stackTrace);
@@ -163,12 +167,77 @@ Future<void> _generateCode(ArgResults results) async {
   }
 }
 
-/// Watch files for changes and regenerate automatically.
+/// Watch for file changes and regenerate code
 Future<void> _watchFiles(
-  RiveGenConfig config,
-  List<String> initialFiles,
+  String configPath,
+  String? assetsPath,
+  String? outputDir,
+  bool debugMode,
 ) async {
-  // TODO: Implement file watching
-  Logger.warning('Watch mode is not yet implemented');
-  Logger.info('This feature will be added in a future version');
+  print('');
+  Logger.info('File watching is not yet implemented');
+  Logger.warning('This feature will be added in a future release');
+  print('\nPlanning to watch:');
+  print('  • Configuration file: $configPath');
+  if (assetsPath != null) {
+    print('  • Assets directory: $assetsPath');
+  }
+  if (outputDir != null) {
+    print('  • Output directory: $outputDir');
+  }
+
+  print('');
+  Logger.info('For now, you can run the generator manually when files change:');
+  print(
+    '  dart run rive_gen ${debugMode ? '--debug ' : ''}${configPath != 'rive_gen.yaml' ? '--config=$configPath ' : ''}${assetsPath != null ? '--assets-path=$assetsPath ' : ''}${outputDir != null ? '--output-dir=$outputDir' : ''}',
+  );
+
+  // TODO: Implement proper file watching using package:watcher
+  // This would involve:
+  // 1. Creating a DirectoryWatcher for the assets directory
+  // 2. Creating a FileWatcher for the config file
+  // 3. Debouncing file change events to avoid rapid regeneration
+  // 4. Automatically running the generator when changes are detected
+
+  /*
+  Future implementation outline:
+  
+  import 'package:watcher/watcher.dart';
+  
+  final configWatcher = FileWatcher(configPath);
+  final assetsWatcher = DirectoryWatcher(assetsDirectory);
+  
+  // Debounce mechanism to avoid rapid regeneration
+  Timer? debounceTimer;
+  
+  void scheduleRegeneration() {
+    debounceTimer?.cancel();
+    debounceTimer = Timer(Duration(milliseconds: 500), () async {
+      try {
+        print('Files changed, regenerating...');
+        await _runGeneration(configPath, assetsPath, outputDir, debugMode);
+        print('✅ Regeneration complete');
+      } catch (e) {
+        print('❌ Regeneration failed: $e');
+      }
+    });
+  }
+  
+  configWatcher.events.listen((event) {
+    print('Config file changed: ${event.path}');
+    scheduleRegeneration();
+  });
+  
+  assetsWatcher.events.listen((event) {
+    if (event.path.endsWith('.riv')) {
+      print('Rive file changed: ${event.path}');
+      scheduleRegeneration();
+    }
+  });
+  
+  print('👀 Watching for changes... Press Ctrl+C to stop');
+  
+  // Keep the process alive
+  await Completer<void>().future;
+  */
 }
