@@ -56,11 +56,14 @@ class RiveGenConfig {
       }
 
       final content = await file.readAsString();
-      final yaml = loadYaml(content) as Map<String, dynamic>?;
+      final yamlDoc = loadYaml(content);
 
-      if (yaml == null) {
+      if (yamlDoc == null) {
         return const RiveGenConfig();
       }
+
+      // Convert YamlMap to Map<String, dynamic>
+      final yaml = Map<String, dynamic>.from(yamlDoc as Map);
 
       return RiveGenConfig(
         assetsPath: yaml['assets_path'] ?? 'assets/**/*.riv',
