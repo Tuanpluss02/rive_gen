@@ -13,5 +13,6 @@
 library;
 
 export 'src/config/rive_gen_config.dart';
+export 'src/generators/rive_code_generator.dart';
 export 'src/models/models.dart';
 export 'src/utils/utils.dart';

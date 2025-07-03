@@ -1,0 +1,20 @@
+targets:
+  $default:
+    builders:
+      rive_gen|rive_gen:
+        enabled: true
+        generate_for:
+          - "lib/**"
+        options:
+          assets_path: "assets/**/*.riv"
+          output_dir: "lib/generated"
+          debug_mode: false
+
+builders:
+  rive_gen:
+    import: "package:rive_gen/builder.dart"
+    builder_factories: ["riveGenBuilder"]
+    build_extensions:
+      ".dart": [".g.dart"]
+    auto_apply: none
+    build_to: source 
