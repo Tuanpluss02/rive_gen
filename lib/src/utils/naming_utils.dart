@@ -100,8 +100,10 @@ class NamingUtils {
   static bool isValidDartClassName(String input) {
     if (!isValidDartIdentifier(input)) return false;
 
-    // Class names should start with uppercase
-    return input.isNotEmpty && input[0].toUpperCase() == input[0];
+    // Class names should start with uppercase letter (not underscore)
+    return input.isNotEmpty &&
+        input[0].toUpperCase() == input[0] &&
+        !input.startsWith('_');
   }
 
   /// Dart keywords that cannot be used as identifiers

@@ -1,3 +1,5 @@
+import 'artboard.dart';
+
 /// Represents a Rive asset file with its metadata and components.
 class RiveAsset {
   /// The path to the Rive file

@@ -1,3 +1,6 @@
+import 'animation.dart';
+import 'state_machine.dart';
+
 /// Represents an artboard within a Rive file.
 class RiveArtboard {
   /// The name of the artboard
@@ -29,14 +32,20 @@ class RiveArtboard {
       stateMachines.isNotEmpty ? stateMachines.first : null;
 
   /// Get a state machine by name
-  RiveStateMachine? getStateMachine(String name) => stateMachines
-      .cast<RiveStateMachine?>()
-      .firstWhere((sm) => sm?.name == name, orElse: () => null);
+  RiveStateMachine? getStateMachine(String name) {
+    for (final sm in stateMachines) {
+      if (sm.name == name) return sm;
+    }
+    return null;
+  }
 
   /// Get an animation by name
-  RiveAnimation? getAnimation(String name) => animations
-      .cast<RiveAnimation?>()
-      .firstWhere((anim) => anim?.name == name, orElse: () => null);
+  RiveAnimation? getAnimation(String name) {
+    for (final anim in animations) {
+      if (anim.name == name) return anim;
+    }
+    return null;
+  }
 
   @override
   String toString() =>

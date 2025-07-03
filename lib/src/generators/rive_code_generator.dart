@@ -98,7 +98,7 @@ class RiveCodeGenerator {
       final asset = _assets[i];
       Logger.progress('Generating asset classes', i + 1, _assets.length);
 
-      final generator = AssetClassGenerator(asset: asset, config: config);
+      final generator = _AssetClassGenerator(asset: asset, config: config);
       final code = generator.generate();
 
       final fileName = NamingUtils.generateFileName(asset.name);
@@ -118,7 +118,7 @@ class RiveCodeGenerator {
       final asset = _assets[i];
       Logger.progress('Generating controllers', i + 1, _assets.length);
 
-      final generator = ControllerGenerator(asset: asset, config: config);
+      final generator = _ControllerGenerator(asset: asset, config: config);
       final code = generator.generate();
 
       final fileName = NamingUtils.generateFileName('${asset.name}_controller');
@@ -141,12 +141,12 @@ class RiveCodeGenerator {
   }
 }
 
-/// Generator for asset classes
-class AssetClassGenerator {
+/// Internal generator for asset classes
+class _AssetClassGenerator {
   final RiveAsset asset;
   final RiveGenConfig config;
 
-  const AssetClassGenerator({required this.asset, required this.config});
+  const _AssetClassGenerator({required this.asset, required this.config});
 
   String generate() {
     final className = config.classPrefix + asset.className + config.classSuffix;
@@ -166,12 +166,12 @@ class $className {
   }
 }
 
-/// Generator for controller classes
-class ControllerGenerator {
+/// Internal generator for controller classes
+class _ControllerGenerator {
   final RiveAsset asset;
   final RiveGenConfig config;
 
-  const ControllerGenerator({required this.asset, required this.config});
+  const _ControllerGenerator({required this.asset, required this.config});
 
   String generate() {
     final className =

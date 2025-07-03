@@ -1,0 +1,27 @@
+# Rive Gen Configuration
+# For more information, see: https://github.com/Tuanpluss02/rive_gen
+
+# Path pattern for Rive assets (supports glob patterns)
+assets_path: assets/**/*.riv
+
+# Output directory for generated files
+output_dir: lib/generated
+
+# Enable debug logging
+debug_mode: false
+
+# Generate individual asset classes
+generate_asset_classes: true
+
+# Generate controller classes with input handling
+generate_controllers: true
+
+# Generate a barrel file for easy imports
+generate_barrel: true
+
+# Package name for imports (auto-detected if not specified)
+# package_name: my_app
+
+# Class name prefix and suffix
+class_prefix: ""
+class_suffix: ""

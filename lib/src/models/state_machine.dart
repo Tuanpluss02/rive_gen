@@ -1,3 +1,5 @@
+import 'input.dart';
+
 /// Represents a state machine within a Rive artboard.
 class RiveStateMachine {
   /// The name of the state machine
@@ -25,10 +27,12 @@ class RiveStateMachine {
   });
 
   /// Get an input by name
-  RiveInput? getInput(String name) => inputs.cast<RiveInput?>().firstWhere(
-    (input) => input?.name == name,
-    orElse: () => null,
-  );
+  RiveInput? getInput(String name) {
+    for (final input in inputs) {
+      if (input.name == name) return input;
+    }
+    return null;
+  }
 
   /// Get all trigger inputs
   List<RiveInput> get triggers =>
